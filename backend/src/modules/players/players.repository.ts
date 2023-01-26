@@ -32,6 +32,14 @@ export class PlayersRepository {
                     identifier: steamHex
                 }
             },
+            select: {
+                id: true,
+                identifier: true,
+                lastname: true,
+                phone_number: true,
+                group: true,
+                gang: true
+            }
         });
     }
 

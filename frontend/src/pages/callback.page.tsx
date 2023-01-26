@@ -29,7 +29,7 @@ export function AuthCallBack() {
             return
         }
 
-        async function test() {
+        async function getToken() {
             try {
                 const token: string = await authService.getToken(String(claimed_id))
                 authContextData.setToken(token)
@@ -41,7 +41,7 @@ export function AuthCallBack() {
         }
 
         return () => {
-            test()
+            getToken()
         }
     }, [claimed_id])
 

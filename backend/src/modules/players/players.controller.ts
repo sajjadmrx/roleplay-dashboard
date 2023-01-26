@@ -1,4 +1,4 @@
-import {Controller, Get, UseGuards} from "@nestjs/common";
+import {Controller, Get, UseFilters, UseGuards, UseInterceptors} from "@nestjs/common";
 import {
     ApiBearerAuth,
     ApiOperation,
@@ -10,14 +10,30 @@ import {CheckPlayerIdGuard} from "../../shared/guards/check-playerId.guard";
 import {PlayersService} from "./players.service";
 import {getPlayer} from "../../shared/decorators/player.decorator";
 import {getUserApp} from "../../shared/decorators/user.decorator";
+import {ResponseInterceptor} from "../../shared/interceptors/response.interceptor";
+import {HttpExceptionFilter} from "../../shared/filters/http-exception.filter";
 
 @ApiTags("Players")
 @ApiBearerAuth()
+@UseFilters(HttpExceptionFilter)
+@UseInterceptors(ResponseInterceptor)
 @UseGuards(CheckPlayerIdGuard)
 @UseGuards(AuthGuard("jwt"))
 @Controller("/players/:playerId")
 export class PlayersController {
     constructor(private playersService: PlayersService) {
+    }
+
+    @ApiOperation({
+        summary: "get player by id",
+    })
+    @ApiParam({
+        name: "playerId",
+        required: true,
+    })
+    @Get("/")
+    getPlayer(@getPlayer() player) {
+        return player
     }
 
     @ApiOperation({
