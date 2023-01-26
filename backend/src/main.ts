@@ -5,6 +5,7 @@ import { ConfigService } from "@nestjs/config";
 import { NestExpressApplication } from "@nestjs/platform-express";
 import process from "process";
 import { DocumentConfig } from "./document.config";
+import { Configs } from "./config";
 
 const options = {
   origin: "*",
@@ -28,12 +29,25 @@ const options = {
     cors: options,
   });
 
+  const config = new ConfigService<Configs>();
+
   app.useGlobalPipes(new ValidationPipe());
 
   app.setGlobalPrefix("/v1");
-  if (process.env.NODE_ENV === "development")
-    new DocumentConfig(app).setupSwagger(port, "api");
+
+  const documentData = {
+    port,
+    route: "api",
+  };
+  if (config.get("NODE_ENV") === "development")
+    new DocumentConfig(app).setupSwagger(documentData.port, documentData.route);
+
   await app.listen(port);
 
   console.log(`Server running on ${port}`);
+
+  config.get("NODE_ENV") == "development" &&
+    console.log(
+      `Api Documents At: http://localhost:${documentData.port}/${documentData.route}`
+    );
 })();

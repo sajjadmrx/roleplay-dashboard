@@ -19,7 +19,6 @@ export class DocumentConfig {
 
     const document = SwaggerModule.createDocument(this.app, config);
     SwaggerModule.setup(route, this.app, document); //It only works on development mode
-    console.log(`http://localhost:${port}/${route}`);
     return this;
   }
 }
