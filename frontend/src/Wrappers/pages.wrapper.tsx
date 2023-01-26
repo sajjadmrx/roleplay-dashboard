@@ -9,6 +9,7 @@ import {userService} from "../service/index.service";
 import React from "react";
 import {AuthContext} from "../shared/interfaces/authContext.interface";
 import {PageLink} from "../shared/interfaces/pages.interface";
+import {useNavigate} from "react-router-dom";
 
 interface Props {
     children: JSX.Element;
@@ -24,6 +25,7 @@ export const PageWrapper = (props: Props) => {
         token,
         setToken,
     }: AuthContext = useContext(authContext);
+    const navigate = useNavigate();
     useEffect(() => {
         async function getUserByToken(): Promise<void> {
             try {
@@ -44,6 +46,8 @@ export const PageWrapper = (props: Props) => {
             });
         else {
             setUser(null);
+            navigate("/")
+
         }
     }, [isAuthenticated]);
 

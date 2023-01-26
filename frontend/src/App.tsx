@@ -12,13 +12,11 @@ import {
     BrowserRouter,
     Routes,
     Route,
-    Link, useParams,
 } from "react-router-dom";
-import {CallbackRoute} from "./routes/callback.route";
-import {appAxios} from "./utils/axios.util";
 import ms from "ms";
 import {PlayerPage} from "./pages/player.page";
 import {User} from "./shared/interfaces/user.interface";
+import {CallbackPage} from "./pages/callback.page";
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(
@@ -37,8 +35,6 @@ function App() {
         token,
         setToken,
     };
-
-
     useEffect(() => {
         if (!token) CookieUtil.delete("token");
         const expireDate = new Date(new Date().getTime() + ms("20d"));
@@ -51,8 +47,9 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path={"/:playerId"} element={<PlayerPage/>}></Route>
+
                     <Route path="/" element={<HomePage/>}/>
-                    <Route path={"/callbacks/*"} element={<CallbackRoute/>}/>
+                    <Route path={"/callbacks/*"} element={<CallbackPage/>}/>
                 </Routes>
             </BrowserRouter>
         </authContext.Provider>

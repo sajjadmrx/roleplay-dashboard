@@ -14,18 +14,14 @@ export function PlayerCard(prop: Prop) {
     const {item} = prop
     return (
         <div>
-            <div className="card border border-[#60606063] mb-0">
-                <div className="card-body grid grid-cols-3 gap-4 text-center">
-                    <div className={"m-auto"}>
-                        {item.value}
+            <div className="card border  border-[#60606063] rounded-lg hover:top-0.5 hover:cursor-pointer mb-0 h-20">
+                <div className="grid grid-rows-3 grid-flow-col gap-4 text-center">
+                    <div className={"mt-2"}>{item.table}</div>
+                    <div className={"row-start-2 row-span-3"} dir={"auto"}>$ {item.value}</div>
+                    <div className={"absolute top-1 left-2"}>
+                        <Avatar src={item.img} size={"xs"} shape={"circle"}/>
                     </div>
-                    <div className={"m-auto"}>
-                        <Badge color={"ghost"}><FontAwesomeIcon icon={"dollar-sign"}/></Badge>
-                    </div>
-                    <div className={""}>
-                        <Avatar src={item.img} size={"md"} shape={"circle"}/>
-                    </div>
-                    <div className={"col-start-1 col-end-3"}>{item.table}</div>
+
                 </div>
             </div>
         </div>

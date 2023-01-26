@@ -9,7 +9,7 @@ import {axiosError} from "../handlers/error.handler";
 import {toast} from "react-toastify";
 
 
-export function CallbackRoute() {
+export function CallbackPage() {
     return (
         <Routes>
             <Route path="auth" handle={true} element={<AuthCallBack/>} caseSensitive={true}/>

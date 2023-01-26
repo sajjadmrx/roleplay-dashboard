@@ -11,9 +11,7 @@ import {CookieUtil} from "../../utils/cookie.util";
 
 
 export function PlaySelectorComponent() {
-    const [ready, setReady] = useState<boolean>(true)
     const authContextData = useContext(authContext);
-    const statusLoading = useContext(authContext).statusLoading;
     const [players, setPlayers] = useState<Array<Player>>([])
     useEffect(() => {
 
