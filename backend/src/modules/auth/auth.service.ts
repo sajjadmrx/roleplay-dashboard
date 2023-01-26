@@ -1,13 +1,14 @@
 import { getResponseMessage } from "../../shared/enums/messages.enums";
 import { Request, Response } from "express";
 import { User } from "../../shared/interfaces/User.interface";
-import methods from "../../utils/methods.util";
+
 // @ts-ignore
 import SteamWebAPI from "steam-web";
 
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { UsersRepository } from "src/modules/users/users.repository";
+import { SteamIdConverter } from "../../utils/steamId.util";
 
 @Injectable()
 export class AuthService {
@@ -45,7 +46,7 @@ export class AuthService {
       const steamId: string = regexData[1] as string;
       const profile = await getUserProfile(this.STEAM_API_KEY, steamId);
       let user: User | null = await this.usersRepository.findBySteamId(steamId);
-      const steamHex: string = methods.getSteamHex(steamId);
+      const steamHex: string = new SteamIdConverter(steamId).getSteamHex();
       if (!user)
         user = await this.usersRepository.create({
           steamId: steamId,

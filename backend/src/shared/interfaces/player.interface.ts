@@ -1,5 +1,3 @@
-import jobList from "../enums/jobs.enums";
-import groupList from "../enums/group.enum";
 import { Prisma, users } from "@prisma/client";
 
 export interface Accounts {
@@ -69,53 +67,4 @@ export class Player {
       };
     }
   }
-
-  //
-  // getFullName(): string {
-  //   return this.accounts;
-  // }
-
-  // getAccounts(): Accounts {
-  //   if (this.accounts) {
-  //     return JSON.parse(this.accounts);
-  //   } else {
-  //     return { bank: 0, tether: 0, black_money: 0, money: 0, salary: 0 };
-  //   }
-  // }
-  //
-  // private getJob(jobName: string): string {
-  //   const job_ = jobList.find((job) => job.name == jobName);
-  //   if (job_) return JSON.stringify(job_);
-  //
-  //   const bikar = jobList.find((job) => job.name == "unemployed");
-  //   if (bikar) return JSON.stringify(bikar);
-  //   else throw new Error("Unemployed");
-  // }
-  //
-  // getGroup(): any {
-  //   try {
-  //     const name = this.group;
-  //     let group = groupList.find((group) => group.name == name);
-  //     if (!group) {
-  //       group = groupList.find((group) => group.name == "unemployed");
-  //     }
-  //     return group;
-  //   } catch (error) {
-  //     return groupList.find((group) => group.name == "unemployed");
-  //   }
-  // }
-  //
-  // isVip(): Boolean {
-  //   if (this.viptime) {
-  //     const date = new Date();
-  //     const viptime = new Date(this.viptime);
-  //     if (date < viptime) {
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   } else {
-  //     return false;
-  //   }
-  // }
 }
