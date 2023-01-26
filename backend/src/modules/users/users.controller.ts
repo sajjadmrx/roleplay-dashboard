@@ -12,7 +12,7 @@ import { User } from "../../shared/interfaces/User.interface";
 import { ResponseInterceptor } from "../../shared/interceptors/response.interceptor";
 import { HttpExceptionFilter } from "../../shared/filters/http-exception.filter";
 import { UsersService } from "./users.service";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiOperation, ApiTags } from "@nestjs/swagger";
 
 @ApiTags("users")
 @ApiBearerAuth()
@@ -23,11 +23,17 @@ import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
+  @ApiOperation({
+    summary: "user profile",
+  })
   @Get("/@me")
   getMe(@getUserApp() user: User) {
     return user;
   }
 
+  @ApiOperation({
+    summary: "get current user players(characters)",
+  })
   @Get("/@me/players")
   getMyPlayers(@getUserApp("steamHex") steamHex: string) {
     return this.usersService.getMyPlayers(steamHex);

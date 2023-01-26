@@ -1,9 +1,15 @@
-import { Controller, Get, UseGuards } from "@nestjs/common";
-import { ApiBearerAuth, ApiParam, ApiTags } from "@nestjs/swagger";
-import { AuthGuard } from "@nestjs/passport";
-import { CheckPlayerIdGuard } from "../../shared/guards/check-playerId.guard";
-import { PlayersService } from "./players.service";
-import { getPlayer } from "../../shared/decorators/player.decorator";
+import {Controller, Get, UseGuards} from "@nestjs/common";
+import {
+    ApiBearerAuth,
+    ApiOperation,
+    ApiParam,
+    ApiTags,
+} from "@nestjs/swagger";
+import {AuthGuard} from "@nestjs/passport";
+import {CheckPlayerIdGuard} from "../../shared/guards/check-playerId.guard";
+import {PlayersService} from "./players.service";
+import {getPlayer} from "../../shared/decorators/player.decorator";
+import {getUserApp} from "../../shared/decorators/user.decorator";
 
 @ApiTags("Players")
 @ApiBearerAuth()
@@ -11,14 +17,54 @@ import { getPlayer } from "../../shared/decorators/player.decorator";
 @UseGuards(AuthGuard("jwt"))
 @Controller("/players/:playerId")
 export class PlayersController {
-  constructor(private playersService: PlayersService) {}
+    constructor(private playersService: PlayersService) {
+    }
 
-  @ApiParam({
-    name: "playerId",
-    required: true,
-  })
-  @Get("/vehicles")
-  getOwnedVehicles(@getPlayer("id") playerId: number) {
-    return this.playersService.getOwnedVehicles(playerId);
-  }
+    @ApiOperation({
+        summary: "get Owned Vehicles",
+    })
+    @ApiParam({
+        name: "playerId",
+        required: true,
+    })
+    @Get("/vehicles")
+    getOwnedVehicles(@getPlayer("id") playerId: number) {
+        return this.playersService.getOwnedVehicles(playerId);
+    }
+
+    @ApiParam({
+        name: "playerId",
+        required: true,
+    })
+    @ApiOperation({summary: "get Owned licenses"})
+    @Get("/licenses")
+    getOwnedLicenses(@getPlayer("id") playerId: number) {
+        return this.playersService.getOwnedLicenses(playerId)
+    }
+
+
+    @ApiParam({
+        name: "playerId",
+        required: true,
+    })
+    @ApiOperation({
+        summary: "get player status"
+    })
+    @Get("/status")
+    getStatus(@getPlayer("id") playerId: number, @getUserApp("steamHex") steamHex: string) {
+        return this.playersService.getStatus(playerId, steamHex)
+    }
+
+    @ApiParam({
+        name: "playerId",
+        required: true,
+    })
+    @ApiOperation({
+        summary: "get player accounts"
+    })
+    @Get("/accounts")
+    getAccounts(@getPlayer("id") playerId: number, @getUserApp("steamHex") steamHex: string) {
+        return this.playersService.getAccounts(playerId, steamHex)
+    }
+
 }
