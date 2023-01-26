@@ -16,6 +16,7 @@ export class PlayersRepository {
             select: {
                 id: true,
                 identifier: true,
+                firstname: true,
                 lastname: true,
                 phone_number: true,
                 group: true,
@@ -35,6 +36,7 @@ export class PlayersRepository {
             select: {
                 id: true,
                 identifier: true,
+                firstname: true,
                 lastname: true,
                 phone_number: true,
                 group: true,
