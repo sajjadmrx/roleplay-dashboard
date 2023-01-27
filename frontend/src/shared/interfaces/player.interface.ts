@@ -26,7 +26,7 @@ export interface PlayerMedicStatus {
 
 export interface PlayerStatusResponse {
     medState: PlayerMedicStatus
-    status: PlayerStatus
+    status: PlayerStatus[]
 }
 
 

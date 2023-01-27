@@ -38,10 +38,9 @@ export function PlayerPage() {
 
         async function getPlayer(playerIdInput: string) {
             try {
-                const [player, playerStatus, playerAccounts]: [Player, PlayerStatusResponse, PlayerAccounts] =
+                const [player, playerAccounts]: [Player, PlayerAccounts] =
                     await Promise.all([
                             playerService.getPlayer(playerIdInput),
-                            playerService.getStatus(playerIdInput),
                             playerService.getAccounts(playerIdInput),
                         ]
                     )
