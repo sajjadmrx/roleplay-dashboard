@@ -1,5 +1,5 @@
 import React from "react";
-import {Badge, Progress, Table} from "react-daisyui";
+import {Badge, Progress, RadialProgress, Table} from "react-daisyui";
 import {PlayerVehicle} from "../../../../shared/interfaces/player.interface";
 
 interface Prop {
@@ -7,21 +7,36 @@ interface Prop {
     index: number
 }
 
+const garage: any = {
+    "mors": "گمشده"
+}
+const vehicleType: any = {
+    "car": "ماشین"
+}
+
 export function PlayerVehicleRowTable(prop: Prop) {
     const {vehicle} = prop
+    const inMors: boolean = garage[vehicle.garage] == garage.mors
+    const status: any = JSON.parse(vehicle.vehicle)
+    const fuelLevel: number = status.fuelLevel
     return (
         <Table.Row>
-            <span>{prop.index}</span>
+            <span className={"badge badge-ghost p-4"}>{vehicle.plate}</span>
             <span>
-                 <Progress value={vehicle.status} max={100} color={"warning"}/>
-                </span>
+                    {vehicleType[vehicle.type] || "ناشناخته"}
+            </span>
             <span>
-                    {vehicle.type}
-                </span>
+                   <Badge color={inMors ? "error" : "success"}
+                          className={"p-3"}>  {garage[vehicle.garage] || "پارکینگ"}
+                   </Badge>
+            </span>
             <span>
-                   <Badge color={"success"}>  {vehicle.parkingStatus} </Badge>
-                </span>
-            <span>{vehicle.plate}</span>
+                 <Progress value={status.vehicleHealth} max={1000} color={"primary"}/>
+            </span>
+            <span>
+                <RadialProgress value={Number(fuelLevel.toFixed())}
+                                className={""}>{fuelLevel.toFixed()}%</RadialProgress>
+            </span>
         </Table.Row>
     )
 }

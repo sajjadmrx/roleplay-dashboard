@@ -1,7 +1,7 @@
 export interface PlayerVehicle {
-    status: number,
+    vehicle: string,
     type: string,
-    parkingStatus: string,
+    garage: string,
     plate: string
 }
 
@@ -38,6 +38,7 @@ export interface Player {
     phone_number: string
     group: string
     gang: string
+    job: string
 }
 
 export interface PlayerContext extends Partial<Player> {

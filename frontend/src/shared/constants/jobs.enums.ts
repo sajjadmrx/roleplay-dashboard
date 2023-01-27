@@ -1,4 +1,4 @@
-const jobList = [
+export const jobsList = [
     {
         "name": "unemployed",
         "htmlName": "بیکـار",
@@ -105,4 +105,3 @@ const jobList = [
         "icon": "fas fa-tree"
     }
 ]
-export default jobList
