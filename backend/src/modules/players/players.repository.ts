@@ -40,6 +40,7 @@ export class PlayersRepository {
                 lastname: true,
                 phone_number: true,
                 group: true,
+                job: true,
                 gang: true
             }
         });
