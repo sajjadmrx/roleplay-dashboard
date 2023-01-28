@@ -38,6 +38,14 @@ export function HeaderComponent(prop: Prop): JSX.Element {
                 </ul>
             </div>
             <div className="navbar-end">
+                <a
+                    href={"https://github.com/sajjadmrx/roleplay-dashboard"}
+                    target={"_blank"}
+                >
+                    <Button className={"btn gap-2 normal-case btn-ghost"}>
+                        <FontAwesomeIcon icon={["fab", "github"]} size={"lg"}/>
+                    </Button>
+                </a>
                 <ThemeSelectorComponent/>
                 {isAuthenticated ? (
                     <ProfileDropDownComponent/>

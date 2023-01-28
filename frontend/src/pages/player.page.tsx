@@ -59,10 +59,10 @@ export function PlayerPage() {
     }, [currentPlayer]);
 
     const pages = [...pageLinks]
-    pages.push({
-        name: "فروشگاه",
-        to: `/${playerId}/shop`
-    })
+    // pages.push({
+    //     name: "فروشگاه",
+    //     to: `/${playerId}/shop`
+    // })
     return (
         <PageWrapper pageLinks={pages}>
             <playerContext.Provider value={playerContextData}>

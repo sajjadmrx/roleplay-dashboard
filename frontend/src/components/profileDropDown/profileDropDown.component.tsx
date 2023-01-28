@@ -5,6 +5,8 @@ import {authContext} from "../../contexts/authContext";
 import {CookieUtil} from "../../utils/cookie.util";
 import {AuthContext} from "../../shared/interfaces/authContext.interface";
 import {User} from "../../shared/interfaces/user.interface";
+import {Button} from "react-daisyui";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export function ProfileDropDownComponent(): JSX.Element {
     const user: User = useContext(authContext).user as User;
@@ -30,11 +32,6 @@ export function ProfileDropDownComponent(): JSX.Element {
                     tabIndex={0}
                     className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
                 >
-                    <li>
-                        <Link className="justify-between" to="/profile">
-                            پروفایل
-                        </Link>
-                    </li>
                     <li onClick={() => logoutHandler(authContextData)}>
                         <a>خروج</a>
                     </li>
