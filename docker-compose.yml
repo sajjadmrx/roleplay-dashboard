@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  api:
+    build: ./backend
+    container_name: api
+    env_file:
+      - ./backend/.env
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./backend:/dashboard
+      - ./dashboard/node_modules
+    restart: always
+  client:
+    build: ./frontend
+    container_name: client
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - ./app/node_modules
+    env_file:
+      - ./frontend/.env.production
+    stdin_open: true
+    tty: true
+    restart: always
