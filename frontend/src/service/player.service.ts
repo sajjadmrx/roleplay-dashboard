@@ -2,7 +2,7 @@ import {AxiosInstance} from "axios";
 import {Response} from "../shared/interfaces/response.interface";
 import {
     Player,
-    PlayerAccounts,
+    PlayerAccounts, PlayerOwnedLicenses,
     PlayerStatus,
     PlayerStatusResponse,
     PlayerVehicle
@@ -42,6 +42,15 @@ export class PlayerService {
     async getOwnedVehicles(playerId: string): Promise<PlayerVehicle[]> {
         try {
             const response = await this.myAxios.get<Response<PlayerVehicle[]>>(`v1/players/${playerId}/vehicles`);
+            return response.data.data
+        } catch (e) {
+            throw e
+        }
+    }
+
+    async getOwnedLicenses(playerId: string): Promise<PlayerOwnedLicenses[]> {
+        try {
+            const response = await this.myAxios.get<Response<PlayerOwnedLicenses[]>>(`v1/players/${playerId}/licenses`);
             return response.data.data
         } catch (e) {
             throw e

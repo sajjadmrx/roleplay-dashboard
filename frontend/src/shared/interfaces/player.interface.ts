@@ -46,3 +46,8 @@ export interface PlayerContext extends Partial<Player> {
     accounts: Partial<PlayerAccounts>
     setAccounts: (accounts: PlayerAccounts) => void
 }
+
+export interface PlayerOwnedLicenses {
+    type: string,
+    status: number
+}

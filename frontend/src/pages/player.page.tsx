@@ -61,7 +61,7 @@ export function PlayerPage() {
     const pages = [...pageLinks]
     pages.push({
         name: "فروشگاه",
-        to: `/${1}/shop`
+        to: `/${playerId}/shop`
     })
     return (
         <PageWrapper pageLinks={pages}>

@@ -11,7 +11,9 @@ const garage: any = {
     "mors": "گمشده"
 }
 const vehicleType: any = {
-    "car": "ماشین"
+    "car": "ماشین",
+    "helicopter": "هلیکوپتر",
+    "boat": "قایق"
 }
 
 export function PlayerVehicleRowTable(prop: Prop) {
@@ -19,6 +21,7 @@ export function PlayerVehicleRowTable(prop: Prop) {
     const inMors: boolean = garage[vehicle.garage] == garage.mors
     const status: any = JSON.parse(vehicle.vehicle)
     const fuelLevel: number = status.fuelLevel
+    console.log([vehicle.type])
     return (
         <Table.Row>
             <span className={"badge badge-ghost p-4"}>{vehicle.plate}</span>

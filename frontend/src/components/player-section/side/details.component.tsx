@@ -1,18 +1,60 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Avatar, Badge} from "react-daisyui";
+import {Avatar, Badge, Tooltip} from "react-daisyui";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {PlayerContext} from "../../../shared/interfaces/player.interface";
+import {PlayerContext, PlayerOwnedLicenses} from "../../../shared/interfaces/player.interface";
 import {playerContext} from "../context/player.context";
 import {jobsList} from "../../../shared/constants/jobs.enums";
+import {useParams} from "react-router-dom";
+import {playerService} from "../../../service/index.service";
 
+const assetsLicenses = [
+    {
+        type: "drive",
+        status: 0,
+        icon: "car",
+        alt: "خودرو"
+    },
+    {
+        type: "ship", status: 0, icon: "anchor", alt: "کشتی"
+    },
+    {
+        type: "bike", status: 0, icon: "motorcycle", alt: "موتور"
+    },
+    {
+        type: "weapon", status: 0, icon: "bomb", alt: "اسلحه"
+    },
+    {
+        type: "xray", status: 0, icon: "helicopter", alt: "هلی کوپتر"
+    }
+]
 
 export function DetailsComponent() {
     const playerContextData: PlayerContext = useContext<PlayerContext>(playerContext)
+    const [licenses, setLicenses] = useState(assetsLicenses)
     let [job, setJob] = useState<any>({})
+    const {playerId} = useParams()
     useEffect(() => {
-        if (playerContextData.job) {
-            job = jobsList.find(j => j.name == playerContextData.job)
-            setJob(job)
+        if (playerId) {
+            if (playerContextData.job) {
+                job = jobsList.find(j => j.name == playerContextData.job)
+                setJob(job)
+            }
+
+            async function fetchOwnedLicenses() {
+                const data: PlayerOwnedLicenses[] = await playerService.getOwnedLicenses(String(playerId))
+                const finallyLicenses = licenses.map((lic) => {
+                    const licensesValue = data.find(l => l.type == lic.type)
+                    if (licensesValue) {
+                        lic.status = licensesValue.status
+                    }
+                    return lic
+                })
+                setLicenses(finallyLicenses)
+            }
+
+            return () => {
+                fetchOwnedLicenses()
+            }
         }
     }, [playerContextData])
     return (
@@ -53,11 +95,21 @@ export function DetailsComponent() {
                     </Badge>
                     <p className={"text-gray-50"}> {playerContextData.phone_number}</p>
                 </div>
+                <div className={""}>
+                    <h1 className={"text-center text-gray-50 font-bold mb-2"}> مجوزها</h1>
+                    <div className={"grid grid-cols-5 gap-3 text-center bg-gray-800 py-4 rounded "}>
+                        {licenses.map((lin) => {
 
-                <div className={"py-4 bg-gray-800 rounded"}>
-                    <div className={"grid grid-cols-3 gap-3 text-center"}>
-                        <div><FontAwesomeIcon icon={"car"} size={"lg"} className={"text-green-700"}/></div>
-                        <div><FontAwesomeIcon icon={"ship"} size={"lg"} className={"text-red-700"}/></div>
+                            const icon: any = lin.icon;
+                            const color: string = lin.status ? "text-green-700" : "text-red-700"
+                            return (
+                                <div>
+                                    <Tooltip message={lin.alt}>
+                                        <FontAwesomeIcon icon={icon} size={"lg"} className={color}/>
+                                    </Tooltip>
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
             </div>
