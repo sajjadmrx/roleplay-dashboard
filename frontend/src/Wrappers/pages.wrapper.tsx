@@ -45,14 +45,13 @@ export const PageWrapper = (props: Props) => {
             getUserByToken().then((r) => {
             });
         else {
-            setUser(null);
+            setIsAuthenticated(false);
             navigate("/")
-
         }
     }, [isAuthenticated]);
 
     useEffect(() => {
-        if (token) {
+        if (token && typeof token == "string") {
             setIsAuthenticated(true);
         }
     }, [token]);

@@ -42,7 +42,5 @@ export function ProfileDropDownComponent(): JSX.Element {
 
 function logoutHandler(authContext: AuthContext) {
     authContext.setIsAuthenticated(false);
-    authContext.setToken(null)
-    authContext.setUser(null)
     CookieUtil.delete("token");
 }
