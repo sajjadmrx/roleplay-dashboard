@@ -3,4 +3,4 @@ node_modules
 logs/*
 dist
 .idea
-prisma
+prisma/schema.prisma
