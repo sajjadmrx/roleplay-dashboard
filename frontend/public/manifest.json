@@ -1,6 +1,6 @@
 {
-  "short_name": "EasyDL",
-  "name": "easyDL",
+  "short_name": "IRWorld App",
+  "name": "IRWorld RolePlay",
   "icons": [
     {
       "src": "logo16.png",
@@ -36,7 +36,7 @@
   "start_url": "/",
   "scope": ".",
   "display": "standalone",
-  "theme_color": "#34eb5b",
+  "theme_color": "#5867dd",
   "background_color": "#1a1a1a",
-  "description": "ایزی دانلود به شما این امکان را می دهد تا به سرعت از پلتفرم های مختلف دانلود کنید"
+  "description": "تجربه ای متفاوت در نقش آفرینی ، با اف پی اس باورنکردنی ، به همراه اسکریپت های با کیفیت و منحصر به فرد را با سرور آی آر ورد به دست آورید"
 }
