@@ -36,7 +36,6 @@ export const PageWrapper = (props: Props) => {
             } catch (error: any) {
                 if (error.response.status === 401) {
                     setIsAuthenticated(false);
-                    setToken("");
                 }
             }
         }

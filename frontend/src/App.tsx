@@ -36,7 +36,7 @@ function App() {
         setToken,
     };
     useEffect(() => {
-        if (!token) CookieUtil.delete("token");
+        if (!token || token == "null") return CookieUtil.delete("token");
         const expireDate = new Date(new Date().getTime() + ms("20d"));
         // @ts-ignore
         CookieUtil.set("token", token, expireDate)
